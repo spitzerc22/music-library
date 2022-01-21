@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Gallery from './Gallery'
 import SearchBar from './Searchbar'
 import AlbumView from './AlbumView'
@@ -10,6 +10,11 @@ let [searchTerm, setSearchTerm] = useState('')
 let [data, setData] = useState([])
 let [message, setMessage] = useState('Search for Music!')
 
+
+const handleSearch = (e, term) => {
+  e.preventDefault()
+  setSearchTerm(term)
+}
 
 useEffect(() => {
     const API_URL = `https://itunes.apple.com/search?term=`
@@ -28,18 +33,21 @@ useEffect(() => {
 }
 }, [searchTerm])
 
-const handleSearch = (e, term) => {
-    e.preventDefault()
-    setSearchTerm(term)
-}
+
 
 return (
   <div className="App">
   {message}
     <Router>
-        <Route exact path="/" element={<SearchBar handleSearch={handleSearch} />, <Gallery data={data} />} />
-        <Route path="/album/:id" element={<AlbumView />} />
-        <Route path="/artist/:id" element={<ArtistView />} />
+      <Routes>
+          <Route path="/" element={
+            <div>
+          <SearchBar handleSearch={handleSearch} /> <Gallery data={data} />
+          </div>
+          } />
+          <Route path="/album/:id" element={<AlbumView />} />
+          <Route path="/artist/:id" element={<ArtistView />} />
+        </Routes>
     </Router>
   </div>
 );

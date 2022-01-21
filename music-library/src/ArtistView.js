@@ -1,9 +1,10 @@
 import { useParams } from 'react-router-dom'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 const ArtistView = () => {
-    const { id } = useParams()
+    const {id}  = useParams()
     const [ artistData, setArtistData ] = useState([])
+
 
     return (
         <div>

@@ -15,11 +15,18 @@ function GalleryItem(props) {
 
     const detailView = () => {
         return (
-            <div style={detailStyle}>
-                <h2>{props.item.trackName}</h2>
-                <h3>{props.item.collectionName}</h3>
-                <h4>{props.item.primaryGenreName}</h4>
-                <h4>{props.item.releaseDate}</h4>
+            <div>
+                <h2>"{props.data.trackName}"</h2>
+                <h3>
+                    <a href={`/artist/${props.data.artistId}`}>
+                        {props.data.artistName}
+                    </a>
+                </h3>
+                <h3>
+                    <a href={`/album/${props.data.collectionId}`}>
+                        {props.data.collectionName}
+                    </a>
+                </h3>
             </div>
         )
     }
